@@ -5,7 +5,11 @@ __pycache__/
 venv/
 
 # Ignore instance folder (used by Flask web app, e.g., for SQLite database)
+<<<<<<< HEAD
 instance/
 
 # Ignore static folder (only on main branch)
 static/
+=======
+instance/
+>>>>>>> origin/sqlalchemy
