@@ -1,24 +1,29 @@
 from flask import Flask, render_template, redirect, url_for, request, abort, flash
 from flask_bootstrap import Bootstrap5
 import forms
+from flask_bcrypt import Bcrypt
+from flask import redirect
+from flask_login import login_user, LoginManager, login_required, logout_user, current_user
 
 app = Flask(__name__)
 
 app.config.from_mapping(
-    SECRET_KEY = 'secret_key_just_for_dev_environment',
+    SECRET_KEY = 'secret_key_just_for_dev_environment_from_Finn',
     BOOTSTRAP_BOOTSWATCH_THEME = 'pulse'
 )
 
-from db import db, Todo, List, insert_sample  # (1.)
+from db import db, Todo, List, insert_sample, User  # (1.)
 
 bootstrap = Bootstrap5(app)
 
 @app.route('/index')
 @app.route('/')
+@login_required
 def index():
     return redirect(url_for('todos'))
 
 @app.route('/todos/', methods=['GET', 'POST'])
+@login_required
 def todos():
     form = forms.CreateTodoForm()
     if request.method == 'GET':
@@ -35,6 +40,7 @@ def todos():
         return redirect(url_for('todos'))
 
 @app.route('/todos/<int:id>', methods=['GET', 'POST'])
+@login_required
 def todo(id):
     todo = db.session.get(Todo, id)  # !!
     form = forms.TodoForm(obj=todo)  # (2.)  # !!
@@ -67,11 +73,13 @@ def todo(id):
             return redirect(url_for('todo', id=id))
 
 @app.route('/lists/')
+@login_required
 def lists():
     lists = db.session.execute(db.select(List).order_by(List.name)).scalars()  # (6.)  # !!
     return render_template('lists.html', lists=lists)
 
 @app.route('/lists/<int:id>')
+@login_required
 def list(id):
     list = db.session.get(List, id)  # !!
     if list is not None:
@@ -80,6 +88,7 @@ def list(id):
         return redirect(url_for('lists'))
 
 @app.route('/insert/sample')
+@login_required
 def run_insert_sample():
     insert_sample()
     return 'Database flushed and populated with some sample data.'
@@ -106,3 +115,65 @@ def ex(id):
         return render_template('ex2.html')
     else:
         abort(404)
+
+#from flask_bcrypt import Bcrypt
+#from flask import redirect
+#from flask_login import login_user, LoginManager, login_required, logout_user, current_user
+
+bcrypt = Bcrypt(app)
+
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = "login"
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    form = forms.LoginForm()
+
+    if form.validate_on_submit():
+        user = User.query.filter_by(username = form.username.data).first()
+        if user:
+            if bcrypt.check_password_hash(user.password, form.password.data):
+                login_user(user)
+                if request.args :
+                    #testing = request.args.get('next')[1:-1]
+                    #print(testing)
+                    routing = request.args.get('next').replace('/', '')
+                    print(routing)
+                    return redirect(url_for(routing))
+                else:
+                    return redirect(url_for('todos')) #schauen, welche Homeseite ist
+
+    return render_template('login.html', form = form)
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    form = forms.RegisterForm()
+       
+    if request.method=='POST': #überall so machen
+
+        existing_user = User.query.filter_by(
+        username = form.username.data).first()
+        print(existing_user)    
+
+        if not existing_user:
+            hashed_password = bcrypt.generate_password_hash(form.password.data)
+            new_user = User(username = form.username.data, password = hashed_password)
+            db.session.add(new_user)
+            db.session.commit()
+            return redirect(url_for('login'))
+    return render_template('register.html', form = form)
+
+@app.route('/logout', methods=['GET', 'POST'])
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('login'))
+
+#if __name__ == '__main__':
+#    db.create_all()
+#    app.run(debug=True)
