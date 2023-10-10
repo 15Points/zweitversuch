@@ -2,11 +2,19 @@ import click
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import orm
 from app import app
+from flask_login import UserMixin
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///todos.sqlite'
 
 db = SQLAlchemy()
 db.init_app(app)
+
+#app.config['SQAlCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
+
+class User(db.Model, UserMixin):
+    id = db.Column(db.Integer, primary_key = True)
+    username = db.Column(db.String(20), nullable = False, unique = True)
+    password = db.Column(db.String(80), nullable = False)
 
 class Todo(db.Model):
     id = db.Column(db.Integer, primary_key=True, index=True)
