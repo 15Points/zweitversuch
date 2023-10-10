@@ -13,7 +13,7 @@
 
 <body>
 <div class="container border shadow w-50 pb-3 my-3">
-
+    
     <nav class="navbar navbar-expand-xl border-bottom mb-3">
         <div class="container-fluid px-0">
             <a class="navbar-brand" href="{{ url_for('index') }}">To-Do App</a>
@@ -29,6 +29,7 @@
                     {{ render_nav_item('lists', 'Lists') }}
                 </ul>
             </div>
+            <a href="{{url_for('logout')}}"><button>Logout</button></a>
         </div>
     </nav>
 
