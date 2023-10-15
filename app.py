@@ -27,11 +27,12 @@ def index():
 def todos():
     form = forms.CreateTodoForm()
     if request.method == 'GET':
-        todos = db.session.execute(db.select(Todo).order_by(Todo.id)).scalars()  # !!
+        #todos = db.session.execute(db.select(Todo).order_by(Todo.id)).scalars()  # !!
+        todos = db.session.query(Todo).filter_by(user_id=current_user.id)
         return render_template('todos.html', todos=todos, form=form)
     else:  # request.method == 'POST'
         if form.validate():
-            todo = Todo(description=form.description.data)  # !!
+            todo = Todo(description=form.description.data, user_id=current_user.id)  # !!
             db.session.add(todo)  # !!
             db.session.commit()  # !!
             flash('Todo has been created.', 'success')
@@ -42,12 +43,15 @@ def todos():
 @app.route('/todos/<int:id>', methods=['GET', 'POST'])
 @login_required
 def todo(id):
-    todo = db.session.get(Todo, id)  # !!
+    #todo = db.session.get(Todo, id, )  # !!
+    todo = db.session.query(Todo).filter_by(user_id=current_user.id, id=id).first()
+    print(todo)
     form = forms.TodoForm(obj=todo)  # (2.)  # !!
     if request.method == 'GET':
         if todo:
             if todo.lists: form.list_id.data = todo.lists[0].id  # (3.)  # !!
-            choices = db.session.execute(db.select(List).order_by(List.name)).scalars()  # !!
+            #choices = db.session.execute(db.select(List).order_by(List.name)).scalars()  # !!
+            choices = db.session.query(List).filter_by(user_id = current_user.id)
             form.list_id.choices = [(0, 'List?')] + [(c.id, c.name) for c in choices]  # !!
             return render_template('todo.html', form=form)
         else:
@@ -75,13 +79,13 @@ def todo(id):
 @app.route('/lists/')
 @login_required
 def lists():
-    lists = db.session.execute(db.select(List).order_by(List.name)).scalars()  # (6.)  # !!
+    lists = db.session.execute(db.select(List).order_by(List.name)).scalars()  # (6.)  # !! #mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm hier auch user spezifisch?
     return render_template('lists.html', lists=lists)
 
 @app.route('/lists/<int:id>')
 @login_required
 def list(id):
-    list = db.session.get(List, id)  # !!
+    list = db.session.get(List, id)  # !! #mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm hier auch user spezifisch?
     if list is not None:
         return render_template('list.html', list=list)
     else:
