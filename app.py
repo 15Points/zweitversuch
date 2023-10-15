@@ -4,6 +4,7 @@ import forms
 from flask_bcrypt import Bcrypt
 from flask import redirect
 from flask_login import login_user, LoginManager, login_required, logout_user, current_user
+from flask_bcrypt import check_password_hash 
 
 app = Flask(__name__)
 
@@ -120,10 +121,6 @@ def ex(id):
     else:
         abort(404)
 
-#from flask_bcrypt import Bcrypt
-#from flask import redirect
-#from flask_login import login_user, LoginManager, login_required, logout_user, current_user
-
 bcrypt = Bcrypt(app)
 
 login_manager = LoginManager()
@@ -177,6 +174,41 @@ def register():
 def logout():
     logout_user()
     return redirect(url_for('login'))
+
+@app.route('/delete_account', methods=['GET', 'POST'])
+@login_required  
+def delete_account():
+    if request.method == 'GET':
+        return render_template('delete_account.html')
+
+    if request.method == 'POST':
+        
+        user = current_user
+        entered_password = request.form['password']
+
+        if check_password_hash(user.password, entered_password):
+
+            user_id = user.id
+            db.session.query(Todo).filter_by(user_id=user_id).delete()
+            db.session.query(List).filter_by(user_id=user_id).delete()
+            db.session.commit()
+
+            db.session.delete(user)
+            db.session.commit()
+
+            logout_user()
+
+            return redirect(url_for('delete_confirmation'))
+
+        else:#bbb
+            flash('Incorrect password. Please try again.', 'danger')
+            return render_template('delete_account.html')
+
+    #return render_template('delete_account.html') nicht nötig
+
+@app.route('/delete_confirmation')
+def delete_confirmation():
+    return render_template('delete_confirmation.html')
 
 #if __name__ == '__main__':
 #    db.create_all()
