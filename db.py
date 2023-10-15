@@ -15,9 +15,13 @@ class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key = True)
     username = db.Column(db.String(20), nullable = False, unique = True)
     password = db.Column(db.String(80), nullable = False)
+    todos = db.relationship('Todo', back_populates='user') #für Nutzerspezifikation
+    lists = db.relationship('List', back_populates='user') #für Nutzerspezifikation
 
 class Todo(db.Model):
     id = db.Column(db.Integer, primary_key=True, index=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False) #für Nutzerspezifikation
+    user = db.relationship('User', back_populates='todos') #für Nutzerspezifikation
     complete = db.Column(db.Boolean, default=False)
     description = db.Column(db.String, nullable=False)
     lists = db.relationship('List', secondary='todo_list', back_populates='todos')
@@ -30,6 +34,8 @@ class Todo(db.Model):
 
 class List(db.Model):
     id = db.Column(db.Integer, primary_key=True, index=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False) #für Nutzerspezifikation
+    user = db.relationship('User', back_populates='lists') #für Nutzerspezifikation
     name = db.Column(db.String, nullable=False)
     todos = db.relationship(Todo, secondary='todo_list', back_populates='lists')
     complete = False
