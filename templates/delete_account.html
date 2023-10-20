@@ -4,16 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Delete Account</title>
+    {{ bootstrap.load_css() }}
 </head>
-<body>
-    <h2>Delete Your Account</h2>
-    <p>Are you sure you want to delete your account? This action is irreversible.</p>
-    <p>Enter your password to confirm that you really want to proceed.</p>
-    <form method="post">
-        <label for="password">Password:</label>
-        <input type="password" name="password" required>
-        <br>
-        <input type="submit" value="Delete my account">
-    </form>
+<body class="bg-danger">
+    <div class="container border border-dark shadow w-50 bg-dark p-4 my-3">
+        <h1 class="text-danger">Delete Your Account</h1>
+
+        <div class="alert alert-danger">
+            <p>Are you sure you want to delete your account? This action is irreversible.</p>
+            <p>Enter your password to confirm that you really want to proceed.</p>    
+        </div>
+         <form class="m-4" method="post">
+            <label class="ml-4 text-light" for="password">Password:</label>
+            <input type="password" name="password" required>
+            <br>
+            <input class="btn btn-outline-danger mt-4" type="submit" value="Delete my account">
+        </form>
+
+    </div>
+    
 </body>
 </html>
