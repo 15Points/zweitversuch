@@ -1,20 +1,51 @@
+{% from 'bootstrap5/utils.html' import render_messages %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
+    {{ bootstrap.load_css() }}
 </head>
 <body>
-    <h1>Register</h1>
 
-    <form method="POST" action="">
-        {{ form.hidden_tag() }}
-        {{ form.username }}
-        {{ form.password }}
-        {{ form.submit }}
-    </form>
+    <div class="container border shadow w-50 p-4 my-3">
+        <h1 class="mb-3">Register</h1>
 
-    <a href="{{url_for('login')}}">You already have an account? Log in here!</a>
+        <div class="alert alert-info">
+            <h4>Welcome to TodoList!</h4>
+            <p>Thank you for choosing TodoList, your personal task management solution. To get started, please create your account by filling in the form below. Here are some tips for creating a strong and secure password:</p>
+            <ul>
+                <li>Use a combination of uppercase and lowercase letters.</li>
+                <li>Include at least one number (0-9) and a special character (e.g., !, @, #, $).</li>
+                <li>Make it at least 8 characters long for added security.</li>
+                <li>Avoid using easily guessable information, such as "password," "123456," or your name.</li>
+            </ul>
+            <p>Please note that the minimum requirements for your password are at least 4 characters and for your username are at least 2 characters.</p>
+        </div>
+
+        {{ render_messages(dismissible=True, dismiss_animate=True) }}
+    
+
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <div class="d-flex flex-column align-items-center">
+                <div class="col-12 m-3 ps-5">
+                    {{ form.username() }}
+                </div>
+                <div class="col-12 mb-3 ps-5">
+                    {{ form.password() }}
+                </div>
+                <div class="col-12 mb-4 ps-5">
+                    {{ form.submit(class='btn btn-primary') }}
+                </div>
+            </div>
+        </form>
+
+        <a href="{{url_for('login')}}" class="mt-4">You already have an account? Log in here!</a>
+    </div>
+
+    {{ bootstrap.load_js() }}
 </body>
 </html>
