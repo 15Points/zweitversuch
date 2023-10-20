@@ -1,20 +1,59 @@
+{% from 'bootstrap5/utils.html' import render_messages %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    {{ bootstrap.load_css() }}
 </head>
 <body>
-    <h1>Login</h1>
 
-    <form method="POST" action="">
-        {{ form.hidden_tag() }}
-        {{ form.username }}
-        {{ form.password }}
-        {{ form.submit }}
-    </form>
+    <div class="container border shadow w-50 p-4 my-3">
+        <h1 class="mb-3">Login</h1>
 
-    <a href="{{url_for('register')}}">You do not have an account? Register here!</a>
+        <div class="alert alert-info">
+            <h4>Welcome to TodoList!</h4>
+            <p>TodoList is a personalized task management application designed to help you stay organized and productive. By logging in, you gain access to a range of features that make managing your tasks and to-dos a breeze.</p>
+        </div>
+
+        <!--<div class="alert alert-warning alert-dismissible fade show">
+            A dismissible warning alert
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>-->
+        {{ render_messages(dismissible=True, dismiss_animate=True) }}
+
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="column"></div>
+                </div>
+                <div class="row">
+                    <div class="column"></div>
+                </div>
+                <div class="row">
+                    <div class="column"></div>
+                </div>
+            </div> <!--SCHÖNER MACHEN-->
+            <div class="d-flex flex-column align-items-center">
+                <div class="col-12 m-3 ps-5">
+                    {{ form.username() }}
+                </div>
+                <div class="col-12 mb-3 ps-5">
+                    {{ form.password() }}
+                </div>
+                <div class="col-12 mb-4 ps-5">
+                    {{ form.submit(class='btn btn-primary') }}
+                </div>
+            </div>
+        </form>
+        
+    
+        <a href="{{url_for('register')}}" class="mt-4">You do not have an account? Register here!</a> 
+    </div>
+
+    {{ bootstrap.load_js() }}
 </body>
 </html>
