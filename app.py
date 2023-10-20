@@ -144,10 +144,16 @@ def login():
                     #testing = request.args.get('next')[1:-1]
                     #print(testing)
                     routing = request.args.get('next').replace('/', '')
+                    flash('Login successful!', 'success')
                     print(routing)
                     return redirect(url_for(routing))
                 else:
-                    return redirect(url_for('todos')) #schauen, welche Homeseite ist
+                    flash('Login successful!', 'success')
+                    return redirect(url_for('todos'))
+            else:
+                flash('Incorrect password. Please try again.', 'danger')
+        else:
+            flash('Username not found. Please try again, or register if you don\'t have an account.', 'danger')
 
     return render_template('login.html', form = form)
 
@@ -155,18 +161,27 @@ def login():
 def register():
     form = forms.RegisterForm()
        
-    if request.method=='POST': #überall so machen
+    if request.method=='POST':
 
         existing_user = User.query.filter_by(
         username = form.username.data).first()
         print(existing_user)    
+
+        #if len(form.password.data) < 4:
+        #        flash('Password must be at least 4 characters long.', 'danger')
+        #    # Validate username length
+        #elif len(form.username.data) < 2:
+        #        flash('Username must be at least 2 characters long.', 'danger')
 
         if not existing_user:
             hashed_password = bcrypt.generate_password_hash(form.password.data)
             new_user = User(username = form.username.data, password = hashed_password)
             db.session.add(new_user)
             db.session.commit()
+            flash('Registration successful! You can now log in.', 'success')
             return redirect(url_for('login'))
+        else:
+            flash('Username is already taken. Please choose a different one.', 'danger')
     return render_template('register.html', form = form)
 
 @app.route('/logout', methods=['GET', 'POST'])
