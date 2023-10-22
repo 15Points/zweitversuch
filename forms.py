@@ -14,6 +14,10 @@ class TodoForm(FlaskForm):
     list_id = SelectField(coerce=int, choices=[], validate_choice=False)
     submit = SubmitField('Update')
 
+class CreateListForm(FlaskForm):
+    list_name = StringField(validators=[InputRequired(), Length(min=5)])
+    submit = SubmitField('Create List')    
+
 from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import InputRequired, Length, ValidationError
 #from db import db
