@@ -18,7 +18,7 @@
 <form action="{{ url_for('todos') }}" method="post"
     class="row row-cols-auto g-2 pt-3">
     {{ form.csrf_token }}
-    <div class="col">{{ form.description(class='form-control') }}</div>
+    <div class="col">{{ form.description(class='form-control', placeholder='Enter a new Todo name') }}</div>
     <div class="col">{{ form.submit(class='btn btn-primary') }}</div>
 </form>
 {% endblock %}
