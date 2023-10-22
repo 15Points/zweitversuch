@@ -6,6 +6,7 @@
 
 {% block CONTENT %}
 {% for list in lists %}
+{% if list.user_id == current_user.id %}
 <div class="form-check">
     <label class="form-check-label" for="{{ list.id }}">
         <a href="{{ url_for('list', id=list.id) }}">{{ list.name }}</a>
@@ -14,5 +15,11 @@
         {% if list.complete %} checked {% endif %}
     >
 </div>
+{% endif %}
 {% endfor %}
+<form action="{{ url_for('lists') }}" method="post" class="row row-cols-auto g-2 pt-3">
+    {{ form.hidden_tag() }}
+    <div class="col">{{ form.list_name(class='form-control', placeholder='Enter a new list name', required='required') }}</div>
+    <div class="col">{{ form.submit(class='btn btn-primary') }}</div>
+</form>
 {% endblock %}
