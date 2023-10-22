@@ -213,7 +213,7 @@ def delete_account():
 
             logout_user()
 
-            return redirect(url_for('delete_confirmation'))
+            return render_template('delete_confirmation.html')
 
         else:#bbb
             flash('Incorrect password. Please try again.', 'danger')
@@ -221,9 +221,9 @@ def delete_account():
 
     #return render_template('delete_account.html') nicht nötig
 
-@app.route('/delete_confirmation')
-def delete_confirmation():
-    return render_template('delete_confirmation.html')
+#@app.route('/delete_confirmation')
+#def delete_confirmation():
+#    return render_template('delete_confirmation.html')
 
 #if __name__ == '__main__':
 #    db.create_all()
