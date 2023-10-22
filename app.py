@@ -80,19 +80,20 @@ def todo(id):
 @app.route('/lists/', methods=['GET', 'POST']) #aaaaaaaaaaaaaa um POST erweitert
 @login_required
 def lists():
-    #lists = db.session.execute(db.select(List).order_by(List.name)).scalars()  # (6.)  # !!
+    form = forms.CreateListForm()
+
     if request.method == 'POST':
-        
-        list_name = request.form.get('list_name')
-        if list_name:
+        if form.validate_on_submit():
+            list_name = form.list_name.data
             new_list = List(name=list_name, user_id=current_user.id)
             db.session.add(new_list)
             db.session.commit()
-            flash(f'List "{list_name}" created successfully.', 'success')
-            return redirect(url_for('lists'))
+            flash('List has been created.', 'success')
+        else:
+            flash('List creation failed: validation error.', 'danger')
 
     lists = db.session.query(List).filter_by(user_id=current_user.id)
-    return render_template('lists.html', lists=lists)
+    return render_template('lists.html', lists=lists, form=form)
 
 @app.route('/lists/<int:id>')
 @login_required
