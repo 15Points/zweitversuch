@@ -4,7 +4,8 @@ import forms
 from flask_bcrypt import Bcrypt
 from flask import redirect
 from flask_login import login_user, LoginManager, login_required, logout_user, current_user
-from flask_bcrypt import check_password_hash 
+from flask_bcrypt import check_password_hash
+from flask import jsonify
 
 app = Flask(__name__)
 
@@ -50,15 +51,22 @@ def todo(id):
     form = forms.TodoForm(obj=todo)  # (2.)  # !!
     if request.method == 'GET':
         if todo:
-            if todo.lists: form.list_id.data = todo.lists[0].id  # (3.)  # !!
-            #choices = db.session.execute(db.select(List).order_by(List.name)).scalars()  # !!
-            choices = db.session.query(List).filter_by(user_id = current_user.id)
-            form.list_id.choices = [(0, 'List?')] + [(c.id, c.name) for c in choices]  # !!
-            return render_template('todo.html', form=form)
+            #if todo.lists: form.list_id.data = todo.lists[0].id  # (3.)  # !!
+            ##choices = db.session.execute(db.select(List).order_by(List.name)).scalars()  # !!
+            #choices = db.session.query(List).filter_by(user_id = current_user.id)
+            #form.list_id.choices = [(0, 'List?')] + [(c.id, c.name) for c in choices]  # !!
+            #return render_template('todo.html', form=form)
+            todo_dict = {"id":todo.id,
+                         "complete":todo.complete,
+                         "description":todo.description,
+                         "user_id":todo.user_id,
+                         "lists":todo.lists}
+            return jsonify(todo_dict)
         else:
             abort(404)
     else:  # request.method == 'POST'
         if form.method.data == 'PATCH':
+            print(form.data)
             if form.validate():
                 form.populate_obj(todo)  # (4.)
                 todo.populate_lists([form.list_id.data])  # (5.)  # !!
