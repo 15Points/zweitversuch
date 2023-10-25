@@ -6,7 +6,7 @@ nav_order: 1
 Finn Höhne
 {: .label }
 
-# Value proposition
+# Optimizing Productivity with TodoList: Value Proposition, Persona, and Aligned Feature Ideation
 {: .no_toc }
 
 <details open markdown="block">
@@ -17,6 +17,8 @@ Finn Höhne
 - TOC
 {:toc}
 </details>
+
+## Value Proposition
 
 TodoList is the website to manage your to-dos. It comprehends a very clean and 
 
@@ -36,7 +38,7 @@ Here's what makes TodoList stand out:
 {: .label .label-green }
     **Collaboration Made Easy:** Whether it's a personal project, team work, or family tasks, our collaboration features allow you to share tasks and work together seamlessly.
 
-    **Cross-Platform Access:** Access your to-do list from anywhere, at any time, on any device. Our web-based platform ensures you're always connected to your tasks, whether you're at your desk or on the go.
+    **Cross-Platform Access:** Access your to-do list from anywhere, at any time, on any device. Our web-based platform ensures you're always connected to your tasks, whether you're at your desk or on the go. This is realized through user accounts that securely store data and ensure that users can access their tasks from anywhere.
 
     **Data Security:** Your data is precious. We prioritize your privacy and security, ensuring your tasks and personal information are kept safe and confidential. Therefore, naturally no data will be sold to or shared with third parties!
 
@@ -51,3 +53,5 @@ Here's what makes TodoList stand out:
     **Affordable Pricing:** Enjoy all these features without breaking the bank. TodoList offers just one pricing option: FREE OF CHARGE.
 
 TodoList is the ultimate solution for individuals and teams seeking to simplify their lives, increase productivity, and achieve their goals. Try it today and discover how you can make every day more organized and efficient with our todo web application.
+
+
