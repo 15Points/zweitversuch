@@ -6,8 +6,10 @@ from flask import redirect
 from flask_login import login_user, LoginManager, login_required, logout_user, current_user
 from flask_bcrypt import check_password_hash
 from flask import jsonify
+from flask_restful import Api, Resource, reqparse, abort, fields, marshal_with #for RESTful API
 
 app = Flask(__name__)
+api = Api(app)          #for RESTful API
 
 app.config.from_mapping(
     SECRET_KEY = 'secret_key_just_for_dev_environment_from_Finn',
@@ -23,6 +25,60 @@ bootstrap = Bootstrap5(app)
 @login_required
 def index():
     return redirect(url_for('todos'))
+
+todo_parser = reqparse.RequestParser()
+todo_parser.add_argument('description', type=str, required=True, help="This field is required")
+todo_parser.add_argument('complete', type=bool)
+
+todo_fields = {
+    'id': fields.Integer,
+    'description': fields.String,
+    'complete': fields.Boolean,
+    'user_id': fields.Integer,
+}
+
+class TodoResource(Resource):
+    @marshal_with(todo_fields)
+    def get(self, id=None):
+        if id is None:  # Return all todos
+            todos = db.session.query(Todo).filter_by(user_id=current_user.id).all()
+            return todos
+        else: # return single todos
+            todo = db.session.query(Todo).filter_by(user_id=current_user.id, id=id).first()
+            if not todo:
+                abort(404, message="Todo not found")
+            return todo
+
+    @marshal_with(todo_fields)
+    def post(self):
+        args = todo_parser.parse_args()
+        todo = Todo(description=args['description'], user_id=current_user.id)
+        db.session.add(todo)
+        db.session.commit()
+        return todo, 201
+
+    @marshal_with(todo_fields)
+    def patch(self, id):
+        args = todo_parser.parse_args()
+        todo = db.session.query(Todo).filter_by(user_id=current_user.id, id=id).first()
+        if not todo:
+            abort(404, message="Todo not found")
+        if args.description:
+            todo.description = args['description']
+        if args.complete:
+            todo.complete = args['complete']
+        db.session.commit()
+        return todo
+
+    def delete(self, id):
+        todo = db.session.query(Todo).filter_by(user_id=current_user.id, id=id).first()
+        if not todo:
+            abort(404, message="Todo not found")
+        db.session.delete(todo)
+        db.session.commit()
+        return '', 204
+
+api.add_resource(TodoResource, '/api/todos', '/api/todos/<int:id>')
 
 @app.route('/todos/', methods=['GET', 'POST'])
 @login_required
@@ -51,17 +107,17 @@ def todo(id):
     form = forms.TodoForm(obj=todo)  # (2.)  # !!
     if request.method == 'GET':
         if todo:
-            #if todo.lists: form.list_id.data = todo.lists[0].id  # (3.)  # !!
-            ##choices = db.session.execute(db.select(List).order_by(List.name)).scalars()  # !!
-            #choices = db.session.query(List).filter_by(user_id = current_user.id)
-            #form.list_id.choices = [(0, 'List?')] + [(c.id, c.name) for c in choices]  # !!
-            #return render_template('todo.html', form=form)
-            todo_dict = {"id":todo.id,
-                         "complete":todo.complete,
-                         "description":todo.description,
-                         "user_id":todo.user_id,
-                         "lists":todo.lists}
-            return jsonify(todo_dict)
+            if todo.lists: form.list_id.data = todo.lists[0].id  # (3.)  # !!
+            #choices = db.session.execute(db.select(List).order_by(List.name)).scalars()  # !!
+            choices = db.session.query(List).filter_by(user_id = current_user.id)
+            form.list_id.choices = [(0, 'List?')] + [(c.id, c.name) for c in choices]  # !!
+            return render_template('todo.html', form=form)
+            #todo_dict = {"id":todo.id,
+            #             "complete":todo.complete,
+            #             "description":todo.description,
+            #             "user_id":todo.user_id,
+            #             "lists":todo.lists}
+            #return jsonify(todo_dict)
         else:
             abort(404)
     else:  # request.method == 'POST'
