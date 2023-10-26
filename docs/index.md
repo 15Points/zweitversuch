@@ -57,6 +57,10 @@ All these sources I used in addition to the given tutorial to Full-Stack-Webdeve
   
   I used ChatGPT to improve some texts I had written for the documentation. Additionally, I used it to help me find errors in my code, which was sometimes very useful (though not always).
 
++ <https://www.w3schools.io/file/markdown-images/>
+
+  This source was helpful in guiding me on how to format images in Markdown.
+
 
 Last build: {{ site.time | date: '%d %b %Y, %R%:z' }}
 {: .fs-2 }
