@@ -108,11 +108,6 @@ TodoList is the ultimate solution for individuals and teams seeking to simplify 
     Value Proposition Alignment: This feature directly supports the value proposition of an app that is "Effortlessly Easy to Use" by simplifying the task creation process.
     Persona Alignment: Sarah and users like her can benefit from a hassle-free and time-saving task entry method.
 
-+ **One-Click Task Completion:**
-    Description: Enable users to mark a task as complete with a single click, without the need for additional confirmation steps. This simplifies the task management process.
-    Value Proposition Alignment: Supporting one-click task completion aligns with the value proposition of an app that is "Effortlessly Easy to Use."
-    Persona Alignment: Sarah can appreciate a quick and straightforward way to mark tasks as complete, saving her time and streamlining her workflow.
-
 + **Adaptive Task Management:**
     Description: TodoList offers adaptability that allows users to manage various types of tasks efficiently, whether they are work-related, personal, or a mix of both. Users can easily delete, edit, and rearrange tasks based on their changing needs.
     Value Proposition Alignment: This feature embodies the value proposition of an "Effortlessly Easy to Use" app by providing adaptability that suits users' evolving requirements, whether it's managing work to-dos, personal tasks, or a combination of both.
