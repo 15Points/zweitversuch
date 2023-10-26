@@ -9,19 +9,17 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///todos.sqlite'
 db = SQLAlchemy()
 db.init_app(app)
 
-#app.config['SQAlCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
-
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key = True)
     username = db.Column(db.String(20), nullable = False, unique = True)
     password = db.Column(db.String(80), nullable = False)
-    todos = db.relationship('Todo', back_populates='user') #für Nutzerspezifikation
-    lists = db.relationship('List', back_populates='user') #für Nutzerspezifikation
+    todos = db.relationship('Todo', back_populates='user') # for user specifity
+    lists = db.relationship('List', back_populates='user') # for user specifity
 
 class Todo(db.Model):
     id = db.Column(db.Integer, primary_key=True, index=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False) #für Nutzerspezifikation
-    user = db.relationship('User', back_populates='todos') #für Nutzerspezifikation
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False) # for user specifity
+    user = db.relationship('User', back_populates='todos') # for user specifity
     complete = db.Column(db.Boolean, default=False)
     description = db.Column(db.String, nullable=False)
     lists = db.relationship('List', secondary='todo_list', back_populates='todos')
@@ -34,8 +32,8 @@ class Todo(db.Model):
 
 class List(db.Model):
     id = db.Column(db.Integer, primary_key=True, index=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False) #für Nutzerspezifikation
-    user = db.relationship('User', back_populates='lists') #für Nutzerspezifikation
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False) # for user specifity
+    user = db.relationship('User', back_populates='lists') # for user specifity
     name = db.Column(db.String, nullable=False)
     todos = db.relationship(Todo, secondary='todo_list', back_populates='lists')
     complete = False
@@ -62,32 +60,33 @@ def init():  # (1.)
 
 app.cli.add_command(init)  # (2.)
 
-def insert_sample():
-    # Delete all existing data, if any
-    db.session.execute(db.delete(todo_list))
-    db.session.execute(db.delete(Todo))
-    db.session.execute(db.delete(List)) 
+#def insert_sample():                                    # not viable with the implemented user handling
+#    # Delete all existing data, if any
+#    db.session.execute(db.delete(todo_list))
+#    db.session.execute(db.delete(Todo))
+#    db.session.execute(db.delete(List)) 
+#
+#    # Create sample to-do items
+#    todo1 = Todo(complete=True, description='Get some food')
+#    todo2 = Todo(description='Drive the bike more often')
+#    todo3 = Todo(description='Implement web app')
+#    todo4 = Todo(complete=True, description='Call mom')
+#    todo5 = Todo(complete=True, description='Clean up') 
+#
+#    # Create sample to-do list items
+#    list1 = List(name='Life')
+#    list2 = List(name='Work')
+#    list3 = List(name='Family')
+#
+#    # Associate to-do items to lists by filling their `Todo.list` attribute
+#    todo1.lists.append(list1)
+#    todo2.lists.append(list1)
+#    todo2.lists.append(list2)
+#    todo3.lists.append(list2)
+#    todo4.lists.append(list3)
+#    todo5.lists.append(list3)   
+#
+#    # Add all objects to the queue and commit them to the database
+#    db.session.add_all([todo1, todo2, todo3, todo4, todo5, list1, list2, list3])
+#    db.session.commit()
 
-    # Create sample to-do items
-    todo1 = Todo(complete=True, description='Get some food')
-    todo2 = Todo(description='Drive the bike more often')
-    todo3 = Todo(description='Implement web app')
-    todo4 = Todo(complete=True, description='Call mom')
-    todo5 = Todo(complete=True, description='Clean up') 
-
-    # Create sample to-do list items
-    list1 = List(name='Life')
-    list2 = List(name='Work')
-    list3 = List(name='Family')
-
-    # Associate to-do items to lists by filling their `Todo.list` attribute
-    todo1.lists.append(list1)
-    todo2.lists.append(list1)
-    todo2.lists.append(list2)
-    todo3.lists.append(list2)
-    todo4.lists.append(list3)
-    todo5.lists.append(list3)   
-
-    # Add all objects to the queue and commit them to the database
-    db.session.add_all([todo1, todo2, todo3, todo4, todo5, list1, list2, list3])
-    db.session.commit()
