@@ -32,6 +32,7 @@ All these sources I used in addition to the given tutorial to Full-Stack-Webdeve
 + <https://flask-login.readthedocs.io/en/latest/> **(mandatory source)**
 + <https://www.youtube.com/watch?v=71EU8gnZqZQ>
 + <https://flask-sqlalchemy.palletsprojects.com/en/3.0.x/queries/>
+    
     Those sources I used for the login and register function in app.py, forms.py, and db.py.
 
 **Sources I used for Bootstrap:**
@@ -42,15 +43,18 @@ All these sources I used in addition to the given tutorial to Full-Stack-Webdeve
 
 **Sources I used for the account deletion:**
 + <https://stackoverflow.com/questions/42450813/in-flask-how-do-i-prevent-a-route-from-being-accessed-unless-another-route-has> 
+  
   While I didn't directly use code from this source, it provided the idea of not having a separate route for the confirmation page after deleting an account.
 
 **Sources I used for the RESTful API:**
 + <https://flask-restful.readthedocs.io/en/latest/> **(mandatory source)**
 + <https://www.youtube.com/watch?v=GMppyAPbLYk> 
+  
   I referred to these sources for the API that is just chunk of code in app.py.
 
 **Other sources I used:**
 + <https://chat.openai.com>
+  
   I used ChatGPT to improve some texts I had written for the documentation. Additionally, I used it to help me find errors in my code, which was sometimes very useful (though not always).
 
 
