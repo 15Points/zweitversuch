@@ -36,7 +36,7 @@ Here's what makes TodoList stand out:
 
   **Intuitive User Experience:** TodoList boasts a clean and user-friendly interface. You'll be up and running in no time, with minimal learning curve. That is because our interface is not only powerful but also beautifully clean and uncluttered. It's a pleasure to use, making your daily tasks a breeze to manage.
 
-  **Customer Support:** Our dedicated support team is always ready to assist you. Whether you have questions, feedback, or need help, we're here to ensure your experience is smooth and satisfying. You can contact support at <s_hoehne21@stud.hwr-berlin.de>*
+  **Customer Support:** Our dedicated support team is always ready to assist you. Whether you have questions, feedback, or need help, we're here to ensure your experience is smooth and satisfying. You can contact support at *<s_hoehne21@stud.hwr-berlin.de>*
 
   **Affordable Pricing:** Enjoy all these features without breaking the bank. TodoList offers just one pricing option: FREE OF CHARGE.
 
@@ -56,7 +56,7 @@ TodoList is the ultimate solution for individuals and teams seeking to simplify 
 
 + **Name:** Sarah Smith
 + **Quote:** "Efficiency fuels success."
-![PictureSarah Smith](assets/images/PersonaPic.PNG)
+![PictureSarah Smith](assets/images/PersonaPic.PNG){:width="300px" height="400px"}
   Image generated with: <https://this-person-does-not-exist.com/en> 
 + **Biography:**     Born and raised in the San Francisco Bay Area
     Graduated with a degree in marketing and communications
