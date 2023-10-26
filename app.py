@@ -26,6 +26,7 @@ bootstrap = Bootstrap5(app)
 def index():
     return redirect(url_for('todos'))
 
+############################################################################################### API code chunk start
 todo_parser = reqparse.RequestParser()
 todo_parser.add_argument('description', type=str, required=True, help="This field is required")
 todo_parser.add_argument('complete', type=bool)
@@ -79,6 +80,7 @@ class TodoResource(Resource):
         return '', 204
 
 api.add_resource(TodoResource, '/api/todos', '/api/todos/<int:id>')
+############################################################################################### API code chunk end
 
 @app.route('/todos/', methods=['GET', 'POST'])
 @login_required
@@ -86,7 +88,7 @@ def todos():
     form = forms.CreateTodoForm()
     if request.method == 'GET':
         #todos = db.session.execute(db.select(Todo).order_by(Todo.id)).scalars()  # !!
-        todos = db.session.query(Todo).filter_by(user_id=current_user.id)
+        todos = db.session.query(Todo).filter_by(user_id=current_user.id) # now user specific
         return render_template('todos.html', todos=todos, form=form)
     else:  # request.method == 'POST'
         if form.validate():
@@ -102,17 +104,17 @@ def todos():
 @login_required
 def todo(id):
     #todo = db.session.get(Todo, id, )  # !!
-    todo = db.session.query(Todo).filter_by(user_id=current_user.id, id=id).first()
+    todo = db.session.query(Todo).filter_by(user_id=current_user.id, id=id).first() # now user specific
     print(todo)
     form = forms.TodoForm(obj=todo)  # (2.)  # !!
     if request.method == 'GET':
         if todo:
             if todo.lists: form.list_id.data = todo.lists[0].id  # (3.)  # !!
             #choices = db.session.execute(db.select(List).order_by(List.name)).scalars()  # !!
-            choices = db.session.query(List).filter_by(user_id = current_user.id)
+            choices = db.session.query(List).filter_by(user_id = current_user.id) # now user specific
             form.list_id.choices = [(0, 'List?')] + [(c.id, c.name) for c in choices]  # !!
             return render_template('todo.html', form=form)
-            #todo_dict = {"id":todo.id,
+            #todo_dict = {"id":todo.id,                              #At first, I misunderstood the api and json tasks
             #             "complete":todo.complete,
             #             "description":todo.description,
             #             "user_id":todo.user_id,
@@ -141,15 +143,14 @@ def todo(id):
             flash('Nothing happened.', 'info')
             return redirect(url_for('todo', id=id))
 
-@app.route('/lists/', methods=['GET', 'POST']) #aaaaaaaaaaaaaa um POST erweitert
+@app.route('/lists/', methods=['GET', 'POST']) # POST added
 @login_required
 def lists():
     form = forms.CreateListForm()
 
-    if request.method == 'POST':
+    if request.method == 'POST':                                # Code for creation of lists (similar to the creation of todos)
         if form.validate_on_submit():
-            list_name = form.list_name.data
-            new_list = List(name=list_name, user_id=current_user.id)
+            new_list = List(name=form.list_name.data, user_id=current_user.id)
             db.session.add(new_list)
             db.session.commit()
             flash('List has been created.', 'success')
@@ -162,7 +163,7 @@ def lists():
 @app.route('/lists/<int:id>')
 @login_required
 def list(id):
-    list = db.session.get(List, id)  # !! #mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm hier auch user spezifisch?
+    list = db.session.get(List, id)  # !!
     if list is not None:
         return render_template('list.html', list=list)
     else:
@@ -197,6 +198,8 @@ def ex(id):
     else:
         abort(404)
 
+
+######################################################### everything from here onwards is for the account handling
 bcrypt = Bcrypt(app)
 
 login_manager = LoginManager()
@@ -207,7 +210,7 @@ login_manager.login_view = "login"
 def load_user(user_id):
     return User.query.get(int(user_id))
 
-@app.route('/login', methods=['GET', 'POST'])
+@app.route('/login', methods=['GET', 'POST']) # login
 def login():
     form = forms.LoginForm()
 
@@ -225,7 +228,7 @@ def login():
                     return redirect(url_for(routing))
                 else:
                     flash('Login successful!', 'success')
-                    return redirect(url_for('todos'))
+                    return redirect(url_for('todos')) # redirection to todos which acts as home page after successful login
             else:
                 flash('Incorrect password. Please try again.', 'danger')
         else:
@@ -233,7 +236,7 @@ def login():
 
     return render_template('login.html', form = form)
 
-@app.route('/register', methods=['GET', 'POST'])
+@app.route('/register', methods=['GET', 'POST']) # registration
 def register():
     form = forms.RegisterForm()
        
@@ -243,34 +246,28 @@ def register():
         username = form.username.data).first()
         print(existing_user)    
 
-        #if len(form.password.data) < 4:
-        #        flash('Password must be at least 4 characters long.', 'danger')
-        #    # Validate username length
-        #elif len(form.username.data) < 2:
-        #        flash('Username must be at least 2 characters long.', 'danger')
-
         if not existing_user:
             hashed_password = bcrypt.generate_password_hash(form.password.data)
             new_user = User(username = form.username.data, password = hashed_password)
             db.session.add(new_user)
             db.session.commit()
             flash('Registration successful! You can now log in.', 'success')
-            return redirect(url_for('login'))
+            return redirect(url_for('login')) # redirection to login after successful registration
         else:
             flash('Username is already taken. Please choose a different one.', 'danger')
     return render_template('register.html', form = form)
 
-@app.route('/logout', methods=['GET', 'POST'])
+@app.route('/logout', methods=['GET', 'POST']) # logout
 @login_required
 def logout():
     logout_user()
-    return redirect(url_for('login'))
+    return redirect(url_for('login')) # redirection to login after logout
 
-@app.route('/delete_account', methods=['GET', 'POST'])
+@app.route('/delete_account', methods=['GET', 'POST']) # delete account
 @login_required  
 def delete_account():
     if request.method == 'GET':
-        return render_template('delete_account.html')
+        return render_template('delete_account.html') 
 
     if request.method == 'POST':
         
@@ -289,18 +286,18 @@ def delete_account():
 
             logout_user()
 
-            return render_template('delete_confirmation.html')
-
-        else:#bbb
+            return render_template('delete_confirmation.html') # confirmation that account has been deleted
+                                                               # delete_confirmation.html contains a button that redirects back to login
+        else:
             flash('Incorrect password. Please try again.', 'danger')
             return render_template('delete_account.html')
 
-    #return render_template('delete_account.html') nicht nötig
+    #return render_template('delete_account.html') # unnecessary
 
-#@app.route('/delete_confirmation')
+#@app.route('/delete_confirmation')                          # not necessary (now also in /delete_account)
 #def delete_confirmation():
 #    return render_template('delete_confirmation.html')
 
-#if __name__ == '__main__':
+#if __name__ == '__main__':  # at some points when I got errors I wanted to see whether I can run a main method 
 #    db.create_all()
 #    app.run(debug=True)
