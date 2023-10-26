@@ -12,7 +12,7 @@
 </head>
 
 <body>
-<div class="container border shadow w-50 pb-3 my-3">
+<div class="container border shadow w-50 pb-5 my-3">
     
     <nav class="navbar navbar-expand-xl border-bottom mb-3">
         <div class="container-fluid px-0">
@@ -29,8 +29,7 @@
                     {{ render_nav_item('lists', 'Lists') }}
                 </ul>
             </div>
-            <!--<a href="{{url_for('delete_account')}}"><button>Delete my account</button></a>-->
-            <a href="{{url_for('logout')}}"><button type="button" class="btn btn-outline-danger">Logout</button></a>
+            <a href="{{url_for('logout')}}"><button type="button" class="btn btn-outline-dark">Logout</button></a>
         </div>
     </nav>
 
@@ -42,6 +41,10 @@
     </main>
 
 </div>
+<div class="text-center p-3">
+    <a href="{{url_for('delete_account')}}" class="btn btn-outline-danger btn-sm">Delete my account</a>
+</div>
+
 {{ bootstrap.load_js() }}
 </body>
 
