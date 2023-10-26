@@ -35,15 +35,6 @@ Updated
 
 Should the user deletion be handled on an extra html page or just with a push of a button on a page that already exists?
 
-Für diese Webanwendung verwende ich Python und Flask. Vieles an Code war bereits vorgegeben. Meine Aufgabe ist es, die bereits vorhandene Applikation, um User-handling und eine API zu erweitern. 
-
-Deshalb werde ich während der Bearbeitung vermutlich:
-
-+ Mehrere Ansätze versuchen, um das User-handling erfolgreich zu implementieren
-
-+ Den bereits vorhandenen Code teilweise verändern
-
-
 ### Decision
 
 I've added an extra page with a separate route to enhance user awareness regarding their actions before proceeding. The additional page allows for more comprehensive warnings and includes a feature that prompts the user to enter their password as a confirmation of their intent.
@@ -54,8 +45,7 @@ I've added an extra page with a separate route to enhance user awareness regardi
 
  | **Criterion** | **Just a button** | **An extra page** |
  | :------------ | :---------------- | :---------------- |
- | **Advantages** | **Effortless implementation:** This option is definitely easier to implement than the other. **Simplicity:** It streamlines the process, making it easier for users to delete their accounts without additional steps and complexity to the website. **Faster Execution:** Users can delete their accounts quickly, which might be beneficial if they are certain about their decision. |   
- | **User Confirmation:** It adds an extra layer of security by requiring users to confirm their intent through password entry, reducing the likelihood of accidental deletions. **Reduced Unauthorized Deletions:** Provides better protection against unauthorized deletions as the user's password is required for confirmation. **User Education:** The additional page can include information about the consequences of account deletion, giving users a chance to reconsider their decision. |
+ | **Advantages** | **Effortless implementation:** This option is definitely easier to implement than the other. **Simplicity:** It streamlines the process, making it easier for users to delete their accounts without additional steps and complexity to the website. **Faster Execution:** Users can delete their accounts quickly, which might be beneficial if they are certain about their decision. | **User Confirmation:** It adds an extra layer of security by requiring users to confirm their intent through password entry, reducing the likelihood of accidental deletions. **Reduced Unauthorized Deletions:** Provides better protection against unauthorized deletions as the user's password is required for confirmation. **User Education:** The additional page can include information about the consequences of account deletion, giving users a chance to reconsider their decision. |
  | **Decisive Factor** | ❌ While the just a button offers simplicity and efficiency in account deletion, it lacks the essential elements of user confirmation and education. Without these features, there is a higher risk of accidental deletions and users may not fully understand the implications of their actions. Consequently, this option doesn't align with my commitment to prioritize user safety and informed decision-making, which are essential for a positive user experience. | ✔️ **Enhanced User Experience:** The decisive factor in choosing the option of an extra page is the focus on providing an enhanced user experience. While the just a button offers simplicity and efficiency, the extra page prioritizes user engagement and safety. By requiring user confirmation and offering informative content, it fosters a more responsible and user-centric account deletion process. This approach ensures that users are fully aware of the consequences of their actions and helps them make informed decisions, ultimately leading to a more positive overall user experience. |
 
 ---
