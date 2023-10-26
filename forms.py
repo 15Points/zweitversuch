@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms.fields import BooleanField, HiddenField, SelectField, StringField, SubmitField
+from wtforms.fields import BooleanField, HiddenField, SelectField, StringField, SubmitField, PasswordField
 from wtforms.validators import InputRequired, Length
 
 class CreateTodoForm(FlaskForm):
@@ -14,30 +14,18 @@ class TodoForm(FlaskForm):
     list_id = SelectField(coerce=int, choices=[], validate_choice=False)
     submit = SubmitField('Update')
 
-class CreateListForm(FlaskForm):
+class CreateListForm(FlaskForm):                                    # form for list creation
     list_name = StringField(validators=[InputRequired(), Length(min=5)])
     submit = SubmitField('Create List')    
 
-from wtforms import StringField, PasswordField, SubmitField
-from wtforms.validators import InputRequired, Length, ValidationError
-#from db import db
-#
-class RegisterForm(FlaskForm):
+class RegisterForm(FlaskForm):                                      # form for registration
     username = StringField(validators=[InputRequired(), Length(
         min = 2, max = 20)], render_kw={"placeholder": "Username"})
     password = PasswordField(validators=[InputRequired(), Length(
         min = 4, max = 20)], render_kw={"placeholder": "Password"})
     submit = SubmitField("Register")
-#
-#    def validate_username(self, username):
-#        existing_user_username = db.User.query.filter_by(
-#            username = username.data).first()
-#        if existing_user_username:
-#            raise ValidationError(
-#                "This username has already been taken. Please choose a different one."
-#            )
-#        
-class LoginForm(FlaskForm):
+
+class LoginForm(FlaskForm):                                         # form for login
     username = StringField(validators=[InputRequired(), Length(
         min = 2, max = 20)], render_kw={"placeholder": "Username"})
     password = PasswordField(validators=[InputRequired(), Length(
