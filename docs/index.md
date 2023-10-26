@@ -32,11 +32,12 @@ All these sources I used in addition to the given tutorial to Full-Stack-Webdeve
 + <https://flask-login.readthedocs.io/en/latest/> **(mandatory source)**
 + <https://www.youtube.com/watch?v=71EU8gnZqZQ>
 + <https://flask-sqlalchemy.palletsprojects.com/en/3.0.x/queries/>
-  Those sources I used for the login and register function in app.py, forms.py, and db.py.
+    Those sources I used for the login and register function in app.py, forms.py, and db.py.
 
 **Sources I used for Bootstrap:**
 + <https://www.youtube.com/watch?v=-qfEOE4vtxE> 
 + <https://getbootstrap.com/docs/5.3/components/buttons/> 
+  
   I used these sources for every html-related element I added to the website, which ranged from elements like the logout button that I added to the base.html to entire HTML pages such as login.html or delete_account.html.
 
 **Sources I used for the account deletion:**
