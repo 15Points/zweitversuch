@@ -34,8 +34,7 @@ Here's what makes TodoList stand out:
 {: .label .label-green }
   **Smart Reminders:** Never forget a task again. Our app provides intelligent reminders and notifications, helping you stay on top of your commitments and appointments without clutter or confusion.
 
-[Coming soon]
-{: .label .label-green }
+Coming soon {: .label .label-green }
   **Collaboration Made Easy:** Whether it's a personal project, team work, or family tasks, our collaboration features allow you to share tasks and work together seamlessly.
 
   **Cross-Platform Access:** Access your to-do list from anywhere, at any time, on any device. Our web-based platform ensures you're always connected to your tasks, whether you're at your desk or on the go. This is realized through user accounts that securely store data and ensure that users can access their tasks from anywhere.
