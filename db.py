@@ -90,3 +90,33 @@ app.cli.add_command(init)  # (2.)
 #    db.session.add_all([todo1, todo2, todo3, todo4, todo5, list1, list2, list3])
 #    db.session.commit()
 
+def insert_sample(user): # updatet inser_sample to comply the restrictions from the user handling (there cannot be data associted to no account)
+    # Delete all existing data, if any
+    #db.session.execute(db.delete(Todo))
+    #db.session.execute(db.delete(List))
+    db.session.query(Todo).filter_by(user_id=user.id).delete()
+    db.session.query(List).filter_by(user_id=user.id).delete()
+
+    # Create sample to-do items
+    todo1 = Todo(description='Get some food', user_id=user.id)
+    todo2 = Todo(description='Drive the bike more often', user_id=user.id)
+    todo3 = Todo(complete=True, description='Implement web app', user_id=user.id)
+    todo4 = Todo(complete=True, description='Call mom', user_id=user.id)
+    todo5 = Todo(complete=True, description='Clean up', user_id=user.id)
+
+    # Create sample to-do list items
+    list1 = List(name='Life', user_id=user.id)
+    list2 = List(name='Work', user_id=user.id)
+    list3 = List(name='Family', user_id=user.id)
+
+    # Associate to-do items to lists by filling their `Todo.list` attribute
+    todo1.lists.append(list1)
+    todo2.lists.append(list1)
+    todo2.lists.append(list2)
+    todo3.lists.append(list2)
+    todo4.lists.append(list3)
+    todo5.lists.append(list3)
+
+    # Add all objects to the session and commit them to the database
+    db.session.add_all([todo1, todo2, todo3, todo4, todo5, list1, list2, list3])
+    db.session.commit()
