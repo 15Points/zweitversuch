@@ -56,7 +56,9 @@ TodoList is the ultimate solution for individuals and teams seeking to simplify 
 
 + **Name:** Sarah Smith
 + **Quote:** "Efficiency fuels success."
+
 ![PictureSarah Smith](assets/images/PersonaPic.PNG){:width="300px" height="400px"}
+  
   Image generated with: <https://this-person-does-not-exist.com/en> 
 + **Biography:**     Born and raised in the San Francisco Bay Area
     Graduated with a degree in marketing and communications
