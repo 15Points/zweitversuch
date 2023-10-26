@@ -52,17 +52,10 @@ I've added an extra page with a separate route to enhance user awareness regardi
 
 ### Regarded options
 
-| **Criterion** | **Just a button** | **An extra page** |
-| :------------ | :---------------- | :---------------- |
-| **advantages** | 
-+ **effortless implementation:** this option is definitely easier to implement than the other  
-+ **Simplicity:** It streamlines the process, making it easier for users to delete their accounts without additional steps and complexity to the website.
-+ **Faster Execution:** Users can delete their accounts quickly, which might be beneficial if they are certain about their decision. |     
-+ **User Confirmation:** It adds an extra layer of security by requiring users to confirm their intent through password entry, reducing the likelihood of accidental deletions.
-+ **Reduced Unauthorized Deletions:** Provides better protection against unauthorized deletions as the user's password is required for confirmation.
-+ **User Education:** The additional page can include information about the consequences of account deletion, giving users a chance to reconsider their decision. |
-| **disadvantages** |     
-
-| **decisive factor** |
+ | **Criterion** | **Just a button** | **An extra page** |
+ | :------------ | :---------------- | :---------------- |
+ | **Advantages** | **Effortless implementation:** This option is definitely easier to implement than the other. **Simplicity:** It streamlines the process, making it easier for users to delete their accounts without additional steps and complexity to the website. **Faster Execution:** Users can delete their accounts quickly, which might be beneficial if they are certain about their decision. |   
+ | **User Confirmation:** It adds an extra layer of security by requiring users to confirm their intent through password entry, reducing the likelihood of accidental deletions. **Reduced Unauthorized Deletions:** Provides better protection against unauthorized deletions as the user's password is required for confirmation. **User Education:** The additional page can include information about the consequences of account deletion, giving users a chance to reconsider their decision. |
+ | **Decisive Factor** | ❌ While the just a button offers simplicity and efficiency in account deletion, it lacks the essential elements of user confirmation and education. Without these features, there is a higher risk of accidental deletions and users may not fully understand the implications of their actions. Consequently, this option doesn't align with my commitment to prioritize user safety and informed decision-making, which are essential for a positive user experience. | ✔️ **Enhanced User Experience:** The decisive factor in choosing the option of an extra page is the focus on providing an enhanced user experience. While the just a button offers simplicity and efficiency, the extra page prioritizes user engagement and safety. By requiring user confirmation and offering informative content, it fosters a more responsible and user-centric account deletion process. This approach ensures that users are fully aware of the consequences of their actions and helps them make informed decisions, ultimately leading to a more positive overall user experience. |
 
 ---
