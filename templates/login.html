@@ -18,25 +18,10 @@
             <p>TodoList is a personalized task management application designed to help you stay organized and productive. By logging in, you gain access to a range of features that make managing your tasks and to-dos a breeze.</p>
         </div>
 
-        <!--<div class="alert alert-warning alert-dismissible fade show">
-            A dismissible warning alert
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        </div>-->
         {{ render_messages(dismissible=True, dismiss_animate=True) }}
 
         <form method="POST" action="">
             {{ form.hidden_tag() }}
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="column"></div>
-                </div>
-                <div class="row">
-                    <div class="column"></div>
-                </div>
-                <div class="row">
-                    <div class="column"></div>
-                </div>
-            </div> <!--SCHÖNER MACHEN-->
             <div class="d-flex flex-column align-items-center">
                 <div class="col-12 m-3 ps-5">
                     {{ form.username() }}
@@ -50,7 +35,6 @@
             </div>
         </form>
         
-    
         <a href="{{url_for('register')}}" class="mt-4">You do not have an account? Register here!</a> 
     </div>
 
