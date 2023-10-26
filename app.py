@@ -172,8 +172,10 @@ def list(id):
 @app.route('/insert/sample')
 @login_required
 def run_insert_sample():
-    insert_sample()
-    return 'Database flushed and populated with some sample data.'
+    insert_sample(current_user) #added current user to make the function work
+    #return 'Database flushed and populated with some sample data.'
+    flash('Database flushed and populated with some sample data.', 'success')
+    return redirect(url_for('todos'))
 
 @app.errorhandler(404)
 def http_not_found(e):
