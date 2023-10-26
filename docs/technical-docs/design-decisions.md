@@ -47,7 +47,35 @@ I have chosen to use Flask-Login because it appeared to be suitable for most of 
 
 ---
 
-## 02: User deletion on an extra page 
+## 02: Usage of Flask-RESTful for addition of RESTful API
+
+### Meta
+
+Status
+: Work in progress - **Decided** - Obsolete
+
+Updated
+: 25-Oct-2023
+
+### Problem statement
+
+Which Flask extension should I use to facilitate the implementation of a RESTful API?
+
+### Decision
+
+I have chosen to use Flask-RESTful to facilitate the implementation of a RESTful API in my web application. Flask-RESTful provides a framework for building RESTful APIs that aligns with the best practices for developing web services. Its intuitive design and easy integration with Flask make it a strong choice for adding RESTful capabilities to my application. Additionally, the many resources for Flask-RESTful contribute to my decision, as it ensures I have the resources needed for successful implementation.
+
+### Regarded options
+
+| **Criterion** | **Flask-RESTful** | **Flask-Restless-NG** | **Flask-RESTX** | **Flask-smorest** |
+| :------------ | :---------------- | :-------------------- | :-------------- | :---------------- |
+| **Know-how** | ❌ No experience | ❌ No experience | ❌ No experience | ❌ No experience |
+| **characteristics** | **Advantages:** Designed for building RESTful APIs with Flask. Intuitive and well-documented. Strong community support. | **Disadvantages:** Limited resources and documentation. | **Advantages:** Offers a feature-rich environment for building RESTful APIs. More complex but powerful. **Disadvantages:** Steeper learning curve and may introduce unnecessary complexity for simpler projects. | **Advantages:** Designed for documenting RESTful APIs and generating OpenAPI documentation, which can be valuable for larger projects with a focus on API documentation. **Disadvantages:** It might introduce unnecessary complexity and overhead for a project that primarily requires building RESTful APIs without a strong emphasis on documentation |
+| **Decisive Factor** | ✔️ I didn't find any drawbacks in my short research. | ❌ I didn't seem to find as much content about Flask-Restless-NG. | ❌ Not chosen due to complexity and a steeper learning curve, which may be unnecessary for this project. | ❌ Also not chosen because of complexity. |
+
+---
+
+## 03: User deletion on an extra page 
 
 ### Meta
 
