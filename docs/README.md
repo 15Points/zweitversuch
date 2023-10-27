@@ -1,6 +1,6 @@
 # Contents of this repository
 
-You are on the Zweitversuch from Finn Höhne. It contains an awesome todo web app.
+On the main branch is the Zweitversuch from Finn Höhne. It contains an awesome todo web app.
 
 ## Steps to execute the example code
 
