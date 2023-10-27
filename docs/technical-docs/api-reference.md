@@ -39,8 +39,7 @@ Output for `/api/todos`:
 
 Output for `/api/todos/<int:id>`:
 
-![output from route 'api/todos/<int:id>'](../assets/images/apitodosid.PNG)
-
+![output from route 'api/todos/int:id'](../assets/images/todosintid.PNG)
 
 ---
 
