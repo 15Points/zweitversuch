@@ -21,60 +21,71 @@ Finn Höhne
 
 ## [Section / module]
 
-### `function_definition()`
+### `def get(self, id=None)`
 
-**Route:** `/route/`
-
-**Methods:** `POST` `GET` `PATCH` `PUT` `DELETE`
-
-**Purpose:** [Short explanation of what the function does and why]
-
-**Sample output:**
-
-[Show an image, string output, or similar illustration -- or write NONE if function generates no output]
-
----
-
-## [Example, delete this section] Show to-do lists
-
-### `get_lists()`
-
-**Route:** `/lists/`
+**Route:** `/api/todos`, or `/api/todos/<int:id>` The function contains a if condition that checks whether an id is given in the url or not.
 
 **Methods:** `GET`
 
-**Purpose:** Show all to-do lists.
+**Purpose:** The function gives all todos if no id was provided in the url and one specific todo if one was provided return that todo in json
 
 **Sample output:**
 
-![get_lists() sample](../assets/images/fswd-intro_00.png)
+Output for `/api/todos`:
+![output from route 'api/todos'](../assets/images/apitodos.PNG)
+Output for `/api/todos/<int:id>`:
+![output from route 'api/todos/<int:id>'](../assets/images/apitodoid.PNG)
 
 ---
 
-### `get_list_todos(list_id)`
+## [Section / module]
 
-**Route:** `/lists/<int:list_id>`
+### `def post(self)`
 
-**Methods:** `GET`
+**Route:** `/api/todos`
 
-**Purpose:** Retrieve all to-do items of to-do list with ID `list_id` from database and present to user.
+**Methods:** `POST`
+
+**Purpose:** The function creates a new todo for the user.
 
 **Sample output:**
 
-![get_list_todos() sample](../assets/images/fswd-intro_02.png)
+Via login it does not work with normal http-requests, because login goes via a form. Dev-tools f12:
+![output from post](../assets/images/post.PNG) 
+In the upper left-hand corner, I've placed the post, and at the bottom left-hand corner, I've inputted the data. In the upper right-hand side, you can observe the output.
 
 ---
 
-## [Example, delete this section] Insert sample data
+## [Section / module]
 
-### `run_insert_sample()`
+### `def patch(self, id):`
 
-**Route:** `/insert/sample`
+**Route:** `/api/todos/<int:id>`
 
-**Methods:** `GET`
+**Methods:** `PATCH`
 
-**Purpose:** Flush the database and insert sample data set
+**Purpose:** The function changes the todo item with the given id of the user.
 
 **Sample output:**
 
-Browser shows: `Database flushed and populated with some sample data.`
+Via login it does not work with normal http-requests, because login goes via a form. Dev-tools f12:
+![output from patch](../assets/images/patch.PNG)
+In the upper left-hand corner, I've placed the patch, and at the bottom left-hand corner, I've inputted the data. In the upper right-hand side, you can observe the output.
+
+---
+
+## [Section / module]
+
+### `def delete(self, id)`
+
+**Route:** `/api/todos/<int:id>`
+
+**Methods:** `DELETE`
+
+**Purpose:** The function deletes the todo item with the given id of the user.
+
+**Sample output:**
+
+None
+
+---
