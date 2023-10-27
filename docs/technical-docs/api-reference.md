@@ -19,7 +19,7 @@ Finn Höhne
 {:toc}
 </details>
 
-## [Section / module]
+## GET
 
 ### `def get(self, id=None)`
 
@@ -33,12 +33,13 @@ Finn Höhne
 
 Output for `/api/todos`:
 ![output from route 'api/todos'](../assets/images/apitodos.PNG)
+
 Output for `/api/todos/<int:id>`:
 ![output from route 'api/todos/<int:id>'](../assets/images/apitodoid.PNG)
 
 ---
 
-## [Section / module]
+## POST
 
 ### `def post(self)`
 
@@ -56,7 +57,7 @@ In the upper left-hand corner, I've placed the post, and at the bottom left-hand
 
 ---
 
-## [Section / module]
+## PATCH
 
 ### `def patch(self, id):`
 
@@ -74,7 +75,7 @@ In the upper left-hand corner, I've placed the patch, and at the bottom left-han
 
 ---
 
-## [Section / module]
+## DELETE
 
 ### `def delete(self, id)`
 
