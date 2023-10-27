@@ -34,10 +34,11 @@ Finn Höhne
 Output for `/api/todos`:
 ![output from route 'api/todos'](../assets/images/apitodos.PNG)
 
-Output for `/api/todos/<int:id>`:
 
+
+Output for `/api/todos/<int:id>`:
 ![output from route 'api/todos/<int:id>'](../assets/images/apitodoid.PNG)
-![Alt text](../assets/images/apitodoid.PNG)
+
 
 ---
 
