@@ -62,5 +62,9 @@ All these sources I used in addition to the given tutorial to Full-Stack-Webdeve
   This source was helpful in guiding me on how to format images in Markdown.
 
 
+**Important info:**
+I solved the RESTful API task in close collaboration with *Katharina Chroszczinsky*. We thought that it is better to solve the task together than not to solve it at all. We used the same sources and also helped each other directly. We know that the post-test is an individual work and otherwise we also worked independently, alone on the tasks.
+
+
 Last build: {{ site.time | date: '%d %b %Y, %R%:z' }}
 {: .fs-2 }
