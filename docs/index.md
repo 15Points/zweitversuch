@@ -48,7 +48,8 @@ All these sources I used in addition to the given tutorial to Full-Stack-Webdeve
 
 **Sources I used for the RESTful API:**
 + <https://flask-restful.readthedocs.io/en/latest/> **(mandatory source)**
-+ <https://www.youtube.com/watch?v=GMppyAPbLYk> 
++ <https://www.youtube.com/watch?v=GMppyAPbLYk>
++ <https://www.youtube.com/watch?v=kENidSltTuA&list=PLS1QulWo1RIYbSv5_R2I_QbAcvbyqBCun>
   
   I referred to these sources for the API that is just chunk of code in app.py.
 
