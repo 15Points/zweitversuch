@@ -90,7 +90,7 @@ app.cli.add_command(init)  # (2.)
 #    db.session.add_all([todo1, todo2, todo3, todo4, todo5, list1, list2, list3])
 #    db.session.commit()
 
-def insert_sample(user): # updatet inser_sample to comply the restrictions from the user handling (there cannot be data associted to no account)
+def insert_sample(user): # updated insert_sample to comply the restrictions from the user handling (there cannot be data associated to no account)
     # Delete all existing data, if any
     #db.session.execute(db.delete(Todo))
     #db.session.execute(db.delete(List))
